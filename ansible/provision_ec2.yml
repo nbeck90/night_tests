@@ -1,0 +1,6 @@
+---
+
+- name: Deploy Game Chat Site
+  hosts: local
+  roles:
+    - ec2_provisioning

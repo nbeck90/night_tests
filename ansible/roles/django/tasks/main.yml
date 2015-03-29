@@ -1,0 +1,23 @@
+---
+
+- name: Install System Packages
+  apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  sudo: yes
+  with_items:
+    - build-essential
+    - python-dev
+    - python-pip
+    - postgresql-client
+    - libpq-dev
+    - python-pip
+    - python-psycopg2
+    - git
+
+- name: Clone Django Repository
+  git: repo=https://github.com/nbeck90/night_tests.git force=yes dest={{ django_home }}
+
+- name: Install Python Dependencies
+  sudo: yes
+  pip:
+    state: present
+    requirements: "{{ django_home }}/requirements.txt"
